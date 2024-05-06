@@ -8,13 +8,13 @@ namespace AHFS.Models
     {
 
         [Key]
-        public int GradetId { get; set; }
+        public int GradeId { get; set; }
         public int SubjectId { get; set; }
 
         public double GradeValue { get; set; }
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
         [ForeignKey("UserId")]
-        public IdentityUser User { get; set; }
+        public IdentityUser? User { get; set; }
 
 
         [ForeignKey("SubjectId")]
