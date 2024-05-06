@@ -1,34 +1,42 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using AHFS.Data;
 using AHFS.Models;
-using AHFS.Services.Interfaces;
 
 namespace AHFS.Controllers
 {
     public class DocumentsController : Controller
     {
-        private readonly IUserService _userService;
-        private readonly IDocumentService _documentService;
+        private readonly ApplicationDbContext _context;
 
-        public DocumentsController(IUserService userService, IDocumentService documentService)
+        public DocumentsController(ApplicationDbContext context)
         {
-            _userService = userService;
-            _documentService = documentService;
+            _context = context;
         }
 
         // GET: Documents
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-            return View( _documentService.GetDocuments());
+            var applicationDbContext = _context.Document.Include(d => d.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Documents/Details/5
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var document = _documentService.GetDocumentById(id);
+            var document = await _context.Document
+                .Include(d => d.User)
+                .FirstOrDefaultAsync(m => m.DocumentId == id);
             if (document == null)
             {
                 return NotFound();
@@ -40,7 +48,7 @@ namespace AHFS.Controllers
         // GET: Documents/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_userService.GetUsers(), "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -49,26 +57,32 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("DocumentId,Link,UserId")] Document document)
+        public async Task<IActionResult> Create([Bind("DocumentId,Link,UserId")] Document document)
         {
             if (ModelState.IsValid)
             {
-                _documentService.CreateDocument(document);
+                _context.Add(document);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_userService.GetUsers(), "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", document.UserId);
             return View(document);
         }
 
         // GET: Documents/Edit/5
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var document = _documentService.GetDocumentById(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var document = await _context.Document.FindAsync(id);
             if (document == null)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_userService.GetUsers(), "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", document.UserId);
             return View(document);
         }
 
@@ -77,7 +91,7 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("DocumentId,Link,UserId")] Document document)
+        public async Task<IActionResult> Edit(int id, [Bind("DocumentId,Link,UserId")] Document document)
         {
             if (id != document.DocumentId)
             {
@@ -88,22 +102,37 @@ namespace AHFS.Controllers
             {
                 try
                 {
-                    _documentService.UpdateDocument(document);
+                    _context.Update(document);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    return RedirectToAction(nameof(Index));
+                    if (!DocumentExists(document.DocumentId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_userService.GetUsers(), "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", document.UserId);
             return View(document);
         }
 
         // GET: Documents/Delete/5
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var document = _documentService.GetDocumentById(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var document = await _context.Document
+                .Include(d => d.User)
+                .FirstOrDefaultAsync(m => m.DocumentId == id);
             if (document == null)
             {
                 return NotFound();
@@ -115,25 +144,21 @@ namespace AHFS.Controllers
         // POST: Documents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var document = _documentService.GetDocumentById(id);
+            var document = await _context.Document.FindAsync(id);
             if (document != null)
             {
-                _documentService.DeleteDocument(document);
+                _context.Document.Remove(document);
             }
 
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DocumentExists(int id)
         {
-            var document = _documentService.GetDocumentById(id);
-            if (document == null)
-            {
-                return false;
-            }
-            return true;
+            return _context.Document.Any(e => e.DocumentId == id);
         }
     }
 }

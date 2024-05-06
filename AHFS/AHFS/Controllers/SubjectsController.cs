@@ -7,32 +7,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AHFS.Data;
 using AHFS.Models;
-using AHFS.Services.Interfaces;
 
 namespace AHFS.Controllers
 {
     public class SubjectsController : Controller
     {
-        private readonly ITeacherService _teacherService;
-        private readonly ISubjectService _subjectService;
+        private readonly ApplicationDbContext _context;
 
-        public SubjectsController(ITeacherService teacherService, ISubjectService subjectService)
+        public SubjectsController(ApplicationDbContext context)
         {
-            _teacherService = teacherService;
-            _subjectService = subjectService;
+            _context = context;
         }
 
         // GET: Subjects
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_subjectService.GetSubjects());
+            var applicationDbContext = _context.Teacher.Include(s => s.Teacher);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Subjects/Details/5
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-            var subject = _subjectService.GetSubjectById(id);
+            var subject = await _context.Teacher
+                .Include(s => s.Teacher)
+                .FirstOrDefaultAsync(m => m.SubjectId == id);
             if (subject == null)
             {
                 return NotFound();
@@ -44,7 +48,7 @@ namespace AHFS.Controllers
         // GET: Subjects/Create
         public IActionResult Create()
         {
-            ViewData["TeacherId"] = new SelectList(_teacherService.GetTeachers(), "TeacherId", "TeacherId");
+            ViewData["TeacherId"] = new SelectList(_context.Subject, "TeacherId", "TeacherId");
             return View();
         }
 
@@ -53,26 +57,32 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("SubjectId,Link,TeacherId")] Subject subject)
+        public async Task<IActionResult> Create([Bind("SubjectId,TeacherId,Name,NrCredits,Faculty,Type")] Subject subject)
         {
             if (ModelState.IsValid)
             {
-                _subjectService.CreateSubject(subject);
+                _context.Add(subject);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeacherId"] = new SelectList(_teacherService.GetTeachers(), "TeacherId", "TeacherId");
+            ViewData["TeacherId"] = new SelectList(_context.Subject, "TeacherId", "TeacherId", subject.TeacherId);
             return View(subject);
         }
 
         // GET: Subjects/Edit/5
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            var subject = _subjectService.GetSubjectById(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var subject = await _context.Teacher.FindAsync(id);
             if (subject == null)
             {
                 return NotFound();
             }
-            ViewData["TeacherId"] = new SelectList(_teacherService.GetTeachers(), "TeacherId", "TeacherId");
+            ViewData["TeacherId"] = new SelectList(_context.Subject, "TeacherId", "TeacherId", subject.TeacherId);
             return View(subject);
         }
 
@@ -81,7 +91,7 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("SubjectId,Link,TeacherId")] Subject subject)
+        public async Task<IActionResult> Edit(int id, [Bind("SubjectId,TeacherId,Name,NrCredits,Faculty,Type")] Subject subject)
         {
             if (id != subject.SubjectId)
             {
@@ -92,22 +102,37 @@ namespace AHFS.Controllers
             {
                 try
                 {
-                    _subjectService.UpdateSubject(subject);
+                    _context.Update(subject);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    return RedirectToAction(nameof(Index));
+                    if (!SubjectExists(subject.SubjectId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeacherId"] = new SelectList(_teacherService.GetTeachers(), "TeacherId", "TeacherId");
+            ViewData["TeacherId"] = new SelectList(_context.Subject, "TeacherId", "TeacherId", subject.TeacherId);
             return View(subject);
         }
 
         // GET: Subjects/Delete/5
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var subject = _subjectService.GetSubjectById(id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var subject = await _context.Teacher
+                .Include(s => s.Teacher)
+                .FirstOrDefaultAsync(m => m.SubjectId == id);
             if (subject == null)
             {
                 return NotFound();
@@ -119,25 +144,21 @@ namespace AHFS.Controllers
         // POST: Subjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var subject = _subjectService.GetSubjectById(id);
+            var subject = await _context.Teacher.FindAsync(id);
             if (subject != null)
             {
-                _subjectService.DeleteSubject(subject);
+                _context.Teacher.Remove(subject);
             }
 
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SubjectExists(int id)
         {
-            var subject = _subjectService.GetSubjectById(id);
-            if (subject == null)
-            {
-                return false;
-            }
-            return true;
+            return _context.Teacher.Any(e => e.SubjectId == id);
         }
     }
 }

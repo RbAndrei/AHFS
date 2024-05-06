@@ -7,19 +7,17 @@ namespace AHFS.Models
         [Key]
         public int SubjectId { get; set; }
 
-        public int TeacherId { get; set; }
+        public int? TeacherId { get; set; }
 
         public string? Name { get; set; }
-        public int NrCredits { get; set; }
+        public int? NrCredits { get; set; }
 
         public string? Faculty { get; set; }
 
         public string? Type { get; set; }
 
-        public virtual ICollection<Grade> Grade { get; set; }
-
         [ForeignKey("TeacherId")]
-        public virtual Teacher Teacher { get; set; }
+        public Teacher ? Teacher { get; set; }
 
     }
 }

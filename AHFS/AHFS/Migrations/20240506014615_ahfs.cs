@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AHFS.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class ahfs : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -181,11 +181,14 @@ namespace AHFS.Migrations
                 {
                     StudentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNr = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Class = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Group = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Subgroup = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Scholarship = table.Column<bool>(type: "bit", nullable: false),
-                    FinalGrade = table.Column<int>(type: "int", nullable: false),
+                    Scholarship = table.Column<bool>(type: "bit", nullable: true),
+                    FinalGrade = table.Column<int>(type: "int", nullable: true),
                     Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
@@ -227,9 +230,9 @@ namespace AHFS.Migrations
                 {
                     SubjectId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TeacherId = table.Column<int>(type: "int", nullable: false),
+                    TeacherId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NrCredits = table.Column<int>(type: "int", nullable: false),
+                    NrCredits = table.Column<int>(type: "int", nullable: true),
                     Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -240,8 +243,7 @@ namespace AHFS.Migrations
                         name: "FK_Teacher_Subject_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Subject",
-                        principalColumn: "TeacherId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TeacherId");
                 });
 
             migrationBuilder.CreateTable(
@@ -250,24 +252,23 @@ namespace AHFS.Migrations
                 {
                     GradeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectId = table.Column<int>(type: "int", nullable: false),
-                    GradeValue = table.Column<double>(type: "float", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    SubjectId = table.Column<int>(type: "int", nullable: true),
+                    GradeValue = table.Column<double>(type: "float", nullable: true),
+                    StudentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Grade", x => x.GradeId);
                     table.ForeignKey(
-                        name: "FK_Grade_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        name: "FK_Grade_Student_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Student",
+                        principalColumn: "StudentId");
                     table.ForeignKey(
                         name: "FK_Grade_Teacher_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Teacher",
-                        principalColumn: "SubjectId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "SubjectId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -315,14 +316,14 @@ namespace AHFS.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Grade_StudentId",
+                table: "Grade",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Grade_SubjectId",
                 table: "Grade",
                 column: "SubjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Grade_UserId",
-                table: "Grade",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Student_UserId",
@@ -365,10 +366,10 @@ namespace AHFS.Migrations
                 name: "Grade");
 
             migrationBuilder.DropTable(
-                name: "Student");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Student");
 
             migrationBuilder.DropTable(
                 name: "Teacher");

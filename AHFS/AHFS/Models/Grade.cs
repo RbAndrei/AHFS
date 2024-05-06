@@ -9,16 +9,15 @@ namespace AHFS.Models
 
         [Key]
         public int GradeId { get; set; }
-        public int SubjectId { get; set; }
+        public int? SubjectId { get; set; }
 
-        public double GradeValue { get; set; }
-        public string? UserId { get; set; }
-        [ForeignKey("UserId")]
-        public IdentityUser? User { get; set; }
-
+        public double? GradeValue { get; set; }
+        public int? StudentId { get; set; }
+        [ForeignKey("StudentId")]
+        public Student? Student { get; set; }
 
         [ForeignKey("SubjectId")]
-        public virtual Subject? Subject { get; set; }
+        public Subject? Subject { get; set; }
 
     }
 }

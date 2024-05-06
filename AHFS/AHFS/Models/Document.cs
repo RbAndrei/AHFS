@@ -9,10 +9,10 @@ namespace AHFS.Models
     {
         [Key]
         public int DocumentId { get; set; }
-        public string Link { get; set; }
-        public string UserId { get; set; }
+        public string? Link { get; set; }
+        public string? UserId { get; set; }
         [ForeignKey("UserId")]
-        public IdentityUser User { get; set; }
+        public IdentityUser? User { get; set; }
     }
 }   
     
