@@ -1,23 +1,26 @@
 ﻿@model IEnumerable<AHFS.Models.Student>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
 }
 
-<!DOCTYPE html>
+<h1>Index</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNr)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Class)
             </th>
@@ -45,6 +48,15 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNr)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Class)
             </td>
@@ -75,5 +87,3 @@
 }
     </tbody>
 </table>
-</body>
-</html>

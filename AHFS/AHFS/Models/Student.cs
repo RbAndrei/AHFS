@@ -8,16 +8,19 @@ namespace AHFS.Models
     {
         [Key]
         public int StudentId { get; set; }
-        public string Class { get; set; }
-        public string Group { get; set; }
-        public string Subgroup { get; set; }
-        public bool Scholarship { get; set; }
-        public int FinalGrade { get; set; }
-        public string Faculty { get; set; }
+        public string? Name { get; set; }
+        public string? Email { get; set; }
+        public string? PhoneNr { get; set; }
+        public string? Class { get; set; }
+        public string? Group { get; set; }
+        public string? Subgroup { get; set; }
+        public bool? Scholarship { get; set; }
+        public int? FinalGrade { get; set; }
+        public string? Faculty { get; set; }
 
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
         [ForeignKey("UserId")]
-        public IdentityUser User { get; set; }
+        public IdentityUser? User { get; set; }
 
     }
 }

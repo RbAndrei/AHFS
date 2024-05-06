@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AHFS.Data;
@@ -57,7 +53,7 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StudentId,Class,Group,Subgroup,Scholarship,FinalGrade,Faculty,UserId")] Student student)
+        public async Task<IActionResult> Create([Bind("StudentId,Name,Email,PhoneNr,Class,Group,Subgroup,Scholarship,FinalGrade,Faculty,UserId")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +87,7 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StudentId,Class,Group,Subgroup,Scholarship,FinalGrade,Faculty,UserId")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentId,Name,Email,PhoneNr,Class,Group,Subgroup,Scholarship,FinalGrade,Faculty,UserId")] Student student)
         {
             if (id != student.StudentId)
             {

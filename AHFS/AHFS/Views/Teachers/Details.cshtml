@@ -1,17 +1,10 @@
 ﻿@model AHFS.Models.Teacher
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Details";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
+<h1>Details</h1>
 
 <div>
     <h4>Teacher</h4>
@@ -53,5 +46,3 @@
     <a asp-action="Edit" asp-route-id="@Model?.TeacherId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
-</body>
-</html>

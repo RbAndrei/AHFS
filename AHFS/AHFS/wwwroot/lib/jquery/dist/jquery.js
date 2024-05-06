@@ -81,7 +81,7 @@ var isFunction = function isFunction( obj ) {
 		// (i.e., `typeof document.createElement( "object" ) === "function"`).
 		// We don't want to classify *any* DOM node as a function.
 		// Support: QtWeb <=3.8.5, WebKit <=534.34, wkhtmltopdf tool <=0.12.5
-		// Plus for old WebKit, typeof returns "function" for HTML collections
+		// Plus for old WebKit, typeof returns "function" for HTML students
 		// (e.g., `typeof document.getElementsByTagName("div") === "function"`). (gh-4756)
 		return typeof obj === "function" && typeof obj.nodeType !== "number" &&
 			typeof obj.item !== "function";
@@ -2248,7 +2248,7 @@ Expr = Sizzle.selectors = {
 					attr.toLowerCase() === "text" );
 		},
 
-		// Position-in-collection
+		// Position-in-student
 		"first": createPositionalPseudo( function() {
 			return [ 0 ];
 		} ),
@@ -3531,7 +3531,7 @@ jQuery.Callbacks = function( options ) {
 		// Actual Callbacks object
 		self = {
 
-			// Add a callback or a collection of callbacks to the list
+			// Add a callback or a student of callbacks to the list
 			add: function() {
 				if ( list ) {
 
@@ -4142,7 +4142,7 @@ if ( document.readyState === "complete" ||
 
 
 
-// Multifunctional method to get and set values of a collection
+// Multifunctional method to get and set values of a student
 // The value/s can optionally be executed if it's a function
 var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
 	var i = 0,
@@ -5060,7 +5060,7 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 	i = 0;
 	while ( ( elem = nodes[ i++ ] ) ) {
 
-		// Skip elements already in the context collection (trac-4087)
+		// Skip elements already in the context student (trac-4087)
 		if ( selection && jQuery.inArray( elem, selection ) > -1 ) {
 			if ( ignored ) {
 				ignored.push( elem );
@@ -6030,14 +6030,14 @@ function fixInput( src, dest ) {
 	}
 }
 
-function domManip( collection, args, callback, ignored ) {
+function domManip( student, args, callback, ignored ) {
 
 	// Flatten any nested arrays
 	args = flat( args );
 
 	var fragment, first, scripts, hasScripts, node, doc,
 		i = 0,
-		l = collection.length,
+		l = student.length,
 		iNoClone = l - 1,
 		value = args[ 0 ],
 		valueIsFunction = isFunction( value );
@@ -6046,8 +6046,8 @@ function domManip( collection, args, callback, ignored ) {
 	if ( valueIsFunction ||
 			( l > 1 && typeof value === "string" &&
 				!support.checkClone && rchecked.test( value ) ) ) {
-		return collection.each( function( index ) {
-			var self = collection.eq( index );
+		return student.each( function( index ) {
+			var self = student.eq( index );
 			if ( valueIsFunction ) {
 				args[ 0 ] = value.call( this, index, self.html() );
 			}
@@ -6056,7 +6056,7 @@ function domManip( collection, args, callback, ignored ) {
 	}
 
 	if ( l ) {
-		fragment = buildFragment( args, collection[ 0 ].ownerDocument, false, collection, ignored );
+		fragment = buildFragment( args, student[ 0 ].ownerDocument, false, student, ignored );
 		first = fragment.firstChild;
 
 		if ( fragment.childNodes.length === 1 ) {
@@ -6086,7 +6086,7 @@ function domManip( collection, args, callback, ignored ) {
 					}
 				}
 
-				callback.call( collection[ i ], node, i );
+				callback.call( student[ i ], node, i );
 			}
 
 			if ( hasScripts ) {
@@ -6119,7 +6119,7 @@ function domManip( collection, args, callback, ignored ) {
 		}
 	}
 
-	return collection;
+	return student;
 }
 
 function remove( elem, selector, keepData ) {
@@ -7314,11 +7314,11 @@ function genFx( type, includeWidth ) {
 
 function createTween( value, prop, animation ) {
 	var tween,
-		collection = ( Animation.tweeners[ prop ] || [] ).concat( Animation.tweeners[ "*" ] ),
+		student = ( Animation.tweeners[ prop ] || [] ).concat( Animation.tweeners[ "*" ] ),
 		index = 0,
-		length = collection.length;
+		length = student.length;
 	for ( ; index < length; index++ ) {
-		if ( ( tween = collection[ index ].call( animation, prop, value ) ) ) {
+		if ( ( tween = student[ index ].call( animation, prop, value ) ) ) {
 
 			// We're done with this property
 			return tween;
@@ -9419,7 +9419,7 @@ jQuery.extend( {
 			// Callbacks context
 			callbackContext = s.context || s,
 
-			// Context for global events is callbackContext if it is a DOM node or jQuery collection
+			// Context for global events is callbackContext if it is a DOM node or jQuery student
 			globalEventContext = s.context &&
 				( callbackContext.nodeType || callbackContext.jquery ) ?
 				jQuery( callbackContext ) :
@@ -9717,7 +9717,7 @@ jQuery.extend( {
 				window.clearTimeout( timeoutTimer );
 			}
 
-			// Dereference transport for early garbage collection
+			// Dereference transport for early garbage student
 			// (no matter how long the jqXHR object will be used)
 			transport = undefined;
 

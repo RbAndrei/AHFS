@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AHFS.Data;
@@ -22,7 +18,7 @@ namespace AHFS.Controllers
         // GET: Grades
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Grade.Include(g => g.Subject).Include(g => g.User);
+            var applicationDbContext = _context.Grade.Include(g => g.Student).Include(g => g.Subject);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,9 +31,9 @@ namespace AHFS.Controllers
             }
 
             var grade = await _context.Grade
+                .Include(g => g.Student)
                 .Include(g => g.Subject)
-                .Include(g => g.User)
-                .FirstOrDefaultAsync(m => m.GradetId == id);
+                .FirstOrDefaultAsync(m => m.GradeId == id);
             if (grade == null)
             {
                 return NotFound();
@@ -49,8 +45,8 @@ namespace AHFS.Controllers
         // GET: Grades/Create
         public IActionResult Create()
         {
+            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId");
             ViewData["SubjectId"] = new SelectList(_context.Teacher, "SubjectId", "SubjectId");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -59,7 +55,7 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GradetId,SubjectId,GradeValue,UserId")] Grade grade)
+        public async Task<IActionResult> Create([Bind("GradeId,SubjectId,GradeValue,StudentId")] Grade grade)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +63,8 @@ namespace AHFS.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
             ViewData["SubjectId"] = new SelectList(_context.Teacher, "SubjectId", "SubjectId", grade.SubjectId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", grade.UserId);
             return View(grade);
         }
 
@@ -85,8 +81,8 @@ namespace AHFS.Controllers
             {
                 return NotFound();
             }
+            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
             ViewData["SubjectId"] = new SelectList(_context.Teacher, "SubjectId", "SubjectId", grade.SubjectId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", grade.UserId);
             return View(grade);
         }
 
@@ -95,9 +91,9 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GradetId,SubjectId,GradeValue,UserId")] Grade grade)
+        public async Task<IActionResult> Edit(int id, [Bind("GradeId,SubjectId,GradeValue,StudentId")] Grade grade)
         {
-            if (id != grade.GradetId)
+            if (id != grade.GradeId)
             {
                 return NotFound();
             }
@@ -111,7 +107,7 @@ namespace AHFS.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GradeExists(grade.GradetId))
+                    if (!GradeExists(grade.GradeId))
                     {
                         return NotFound();
                     }
@@ -122,8 +118,8 @@ namespace AHFS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
             ViewData["SubjectId"] = new SelectList(_context.Teacher, "SubjectId", "SubjectId", grade.SubjectId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", grade.UserId);
             return View(grade);
         }
 
@@ -136,9 +132,9 @@ namespace AHFS.Controllers
             }
 
             var grade = await _context.Grade
+                .Include(g => g.Student)
                 .Include(g => g.Subject)
-                .Include(g => g.User)
-                .FirstOrDefaultAsync(m => m.GradetId == id);
+                .FirstOrDefaultAsync(m => m.GradeId == id);
             if (grade == null)
             {
                 return NotFound();
@@ -164,7 +160,7 @@ namespace AHFS.Controllers
 
         private bool GradeExists(int id)
         {
-            return _context.Grade.Any(e => e.GradetId == id);
+            return _context.Grade.Any(e => e.GradeId == id);
         }
     }
 }
