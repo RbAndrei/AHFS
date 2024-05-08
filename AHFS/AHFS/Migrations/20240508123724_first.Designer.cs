@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AHFS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240508122711_first")]
+    [Migration("20240508123724_first")]
     partial class first
     {
         /// <inheritdoc />
@@ -92,8 +92,8 @@ namespace AHFS.Migrations
                     b.Property<string>("Faculty")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FinalGrade")
-                        .HasColumnType("int");
+                    b.Property<double?>("FinalGrade")
+                        .HasColumnType("float");
 
                     b.Property<string>("Group")
                         .HasColumnType("nvarchar(max)");

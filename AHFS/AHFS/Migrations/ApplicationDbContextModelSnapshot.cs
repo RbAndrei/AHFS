@@ -89,8 +89,8 @@ namespace AHFS.Migrations
                     b.Property<string>("Faculty")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FinalGrade")
-                        .HasColumnType("int");
+                    b.Property<double?>("FinalGrade")
+                        .HasColumnType("float");
 
                     b.Property<string>("Group")
                         .HasColumnType("nvarchar(max)");

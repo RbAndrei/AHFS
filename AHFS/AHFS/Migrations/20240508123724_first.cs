@@ -189,7 +189,7 @@ namespace AHFS.Migrations
                     Group = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Subgroup = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Scholarship = table.Column<bool>(type: "bit", nullable: true),
-                    FinalGrade = table.Column<int>(type: "int", nullable: true),
+                    FinalGrade = table.Column<double>(type: "float", nullable: true),
                     Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
