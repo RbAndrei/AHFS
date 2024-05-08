@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AHFS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240506014615_ahfs")]
-    partial class ahfs
+    [Migration("20240508122711_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,9 @@ namespace AHFS.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentId"));
 
                     b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
@@ -156,6 +159,9 @@ namespace AHFS.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherId"));
 
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Faculty")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -395,7 +401,7 @@ namespace AHFS.Migrations
                         .HasForeignKey("StudentId");
 
                     b.HasOne("AHFS.Models.Subject", "Subject")
-                        .WithMany("Grade")
+                        .WithMany()
                         .HasForeignKey("SubjectId");
 
                     b.Navigation("Student");
@@ -479,11 +485,6 @@ namespace AHFS.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AHFS.Models.Subject", b =>
-                {
-                    b.Navigation("Grade");
                 });
 #pragma warning restore 612, 618
         }

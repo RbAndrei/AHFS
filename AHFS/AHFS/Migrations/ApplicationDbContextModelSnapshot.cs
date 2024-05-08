@@ -33,6 +33,9 @@ namespace AHFS.Migrations
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -153,6 +156,9 @@ namespace AHFS.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherId"));
 
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Faculty")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -392,7 +398,7 @@ namespace AHFS.Migrations
                         .HasForeignKey("StudentId");
 
                     b.HasOne("AHFS.Models.Subject", "Subject")
-                        .WithMany("Grade")
+                        .WithMany()
                         .HasForeignKey("SubjectId");
 
                     b.Navigation("Student");
@@ -476,11 +482,6 @@ namespace AHFS.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AHFS.Models.Subject", b =>
-                {
-                    b.Navigation("Grade");
                 });
 #pragma warning restore 612, 618
         }
