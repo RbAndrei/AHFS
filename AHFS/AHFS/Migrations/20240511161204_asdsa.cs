@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AHFS.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class asdsa : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -191,6 +191,11 @@ namespace AHFS.Migrations
                     Scholarship = table.Column<bool>(type: "bit", nullable: true),
                     FinalGrade = table.Column<double>(type: "float", nullable: true),
                     Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sex = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CNP = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Age = table.Column<int>(type: "int", nullable: true),
+                    YearOfStudy = table.Column<int>(type: "int", nullable: true),
+                    Semester = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -204,13 +209,16 @@ namespace AHFS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Subject",
+                name: "Teacher",
                 columns: table => new
                 {
                     TeacherId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sex = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CNP = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Age = table.Column<int>(type: "int", nullable: true),
                     PhoneNr = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -218,33 +226,35 @@ namespace AHFS.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Subject", x => x.TeacherId);
+                    table.PrimaryKey("PK_Teacher", x => x.TeacherId);
                     table.ForeignKey(
-                        name: "FK_Subject_AspNetUsers_UserId",
+                        name: "FK_Teacher_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teacher",
+                name: "Subject",
                 columns: table => new
                 {
                     SubjectId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TeacherId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NrCredits = table.Column<int>(type: "int", nullable: true),
+                    YearOfStudy = table.Column<int>(type: "int", nullable: true),
+                    Semester = table.Column<int>(type: "int", nullable: true),
                     Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TeacherId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teacher", x => x.SubjectId);
+                    table.PrimaryKey("PK_Subject", x => x.SubjectId);
                     table.ForeignKey(
-                        name: "FK_Teacher_Subject_TeacherId",
+                        name: "FK_Subject_Teacher_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "Subject",
+                        principalTable: "Teacher",
                         principalColumn: "TeacherId");
                 });
 
@@ -267,9 +277,9 @@ namespace AHFS.Migrations
                         principalTable: "Student",
                         principalColumn: "StudentId");
                     table.ForeignKey(
-                        name: "FK_Grade_Teacher_SubjectId",
+                        name: "FK_Grade_Subject_SubjectId",
                         column: x => x.SubjectId,
-                        principalTable: "Teacher",
+                        principalTable: "Subject",
                         principalColumn: "SubjectId");
                 });
 
@@ -333,14 +343,14 @@ namespace AHFS.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subject_UserId",
+                name: "IX_Subject_TeacherId",
                 table: "Subject",
-                column: "UserId");
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teacher_TeacherId",
+                name: "IX_Teacher_UserId",
                 table: "Teacher",
-                column: "TeacherId");
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -374,10 +384,10 @@ namespace AHFS.Migrations
                 name: "Student");
 
             migrationBuilder.DropTable(
-                name: "Teacher");
+                name: "Subject");
 
             migrationBuilder.DropTable(
-                name: "Subject");
+                name: "Teacher");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

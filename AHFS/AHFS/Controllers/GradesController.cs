@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AHFS.Data;
@@ -46,7 +50,7 @@ namespace AHFS.Controllers
         public IActionResult Create()
         {
             ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId");
-            ViewData["SubjectId"] = new SelectList(_context.Teacher, "SubjectId", "SubjectId");
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId");
             return View();
         }
 
@@ -64,7 +68,7 @@ namespace AHFS.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
-            ViewData["SubjectId"] = new SelectList(_context.Teacher, "SubjectId", "SubjectId", grade.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", grade.SubjectId);
             return View(grade);
         }
 
@@ -82,7 +86,7 @@ namespace AHFS.Controllers
                 return NotFound();
             }
             ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
-            ViewData["SubjectId"] = new SelectList(_context.Teacher, "SubjectId", "SubjectId", grade.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", grade.SubjectId);
             return View(grade);
         }
 
@@ -119,7 +123,7 @@ namespace AHFS.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["StudentId"] = new SelectList(_context.Student, "StudentId", "StudentId", grade.StudentId);
-            ViewData["SubjectId"] = new SelectList(_context.Teacher, "SubjectId", "SubjectId", grade.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.Subject, "SubjectId", "SubjectId", grade.SubjectId);
             return View(grade);
         }
 

@@ -40,6 +40,10 @@ namespace AHFS.Services
         {
             return _repositoryWrapper.DocumentRepository.FindAll().ToList();
         }
+        public List<Document> GetDocumentsByUserId(string id)
+        {
+            return _repositoryWrapper.DocumentRepository.FindByCondition(c => c.UserId == id).ToList()!;
+        }
 
     }
 }

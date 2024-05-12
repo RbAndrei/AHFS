@@ -80,6 +80,12 @@ namespace AHFS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"));
 
+                    b.Property<int?>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CNP")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Class")
                         .HasColumnType("nvarchar(max)");
 
@@ -104,11 +110,20 @@ namespace AHFS.Migrations
                     b.Property<bool?>("Scholarship")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("Semester")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Sex")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Subgroup")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("YearOfStudy")
+                        .HasColumnType("int");
 
                     b.HasKey("StudentId");
 
@@ -134,17 +149,23 @@ namespace AHFS.Migrations
                     b.Property<int?>("NrCredits")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Semester")
+                        .HasColumnType("int");
+
                     b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("YearOfStudy")
+                        .HasColumnType("int");
+
                     b.HasKey("SubjectId");
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Subject");
                 });
 
             modelBuilder.Entity("AHFS.Models.Teacher", b =>
@@ -154,6 +175,12 @@ namespace AHFS.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherId"));
+
+                    b.Property<int?>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CNP")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -170,6 +197,9 @@ namespace AHFS.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Sex")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -177,7 +207,7 @@ namespace AHFS.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Subject");
+                    b.ToTable("Teacher");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -394,11 +424,11 @@ namespace AHFS.Migrations
             modelBuilder.Entity("AHFS.Models.Grade", b =>
                 {
                     b.HasOne("AHFS.Models.Student", "Student")
-                        .WithMany()
+                        .WithMany("Grades")
                         .HasForeignKey("StudentId");
 
                     b.HasOne("AHFS.Models.Subject", "Subject")
-                        .WithMany()
+                        .WithMany("Grades")
                         .HasForeignKey("SubjectId");
 
                     b.Navigation("Student");
@@ -482,6 +512,16 @@ namespace AHFS.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AHFS.Models.Student", b =>
+                {
+                    b.Navigation("Grades");
+                });
+
+            modelBuilder.Entity("AHFS.Models.Subject", b =>
+                {
+                    b.Navigation("Grades");
                 });
 #pragma warning restore 612, 618
         }

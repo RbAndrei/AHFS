@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AHFS.Data;
@@ -18,7 +22,7 @@ namespace AHFS.Controllers
         // GET: Subjects
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Teacher.Include(s => s.Teacher);
+            var applicationDbContext = _context.Subject.Include(s => s.Teacher);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -30,7 +34,7 @@ namespace AHFS.Controllers
                 return NotFound();
             }
 
-            var subject = await _context.Teacher
+            var subject = await _context.Subject
                 .Include(s => s.Teacher)
                 .FirstOrDefaultAsync(m => m.SubjectId == id);
             if (subject == null)
@@ -44,7 +48,7 @@ namespace AHFS.Controllers
         // GET: Subjects/Create
         public IActionResult Create()
         {
-            ViewData["TeacherId"] = new SelectList(_context.Subject, "TeacherId", "TeacherId");
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "TeacherId", "TeacherId");
             return View();
         }
 
@@ -53,7 +57,7 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SubjectId,TeacherId,Name,NrCredits,Faculty,Type")] Subject subject)
+        public async Task<IActionResult> Create([Bind("SubjectId,Name,NrCredits,YearOfStudy,Semester,Faculty,Type,TeacherId")] Subject subject)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +65,7 @@ namespace AHFS.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeacherId"] = new SelectList(_context.Subject, "TeacherId", "TeacherId", subject.TeacherId);
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "TeacherId", "TeacherId", subject.TeacherId);
             return View(subject);
         }
 
@@ -73,12 +77,12 @@ namespace AHFS.Controllers
                 return NotFound();
             }
 
-            var subject = await _context.Teacher.FindAsync(id);
+            var subject = await _context.Subject.FindAsync(id);
             if (subject == null)
             {
                 return NotFound();
             }
-            ViewData["TeacherId"] = new SelectList(_context.Subject, "TeacherId", "TeacherId", subject.TeacherId);
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "TeacherId", "TeacherId", subject.TeacherId);
             return View(subject);
         }
 
@@ -87,7 +91,7 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SubjectId,TeacherId,Name,NrCredits,Faculty,Type")] Subject subject)
+        public async Task<IActionResult> Edit(int id, [Bind("SubjectId,Name,NrCredits,YearOfStudy,Semester,Faculty,Type,TeacherId")] Subject subject)
         {
             if (id != subject.SubjectId)
             {
@@ -114,7 +118,7 @@ namespace AHFS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeacherId"] = new SelectList(_context.Subject, "TeacherId", "TeacherId", subject.TeacherId);
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "TeacherId", "TeacherId", subject.TeacherId);
             return View(subject);
         }
 
@@ -126,7 +130,7 @@ namespace AHFS.Controllers
                 return NotFound();
             }
 
-            var subject = await _context.Teacher
+            var subject = await _context.Subject
                 .Include(s => s.Teacher)
                 .FirstOrDefaultAsync(m => m.SubjectId == id);
             if (subject == null)
@@ -142,10 +146,10 @@ namespace AHFS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var subject = await _context.Teacher.FindAsync(id);
+            var subject = await _context.Subject.FindAsync(id);
             if (subject != null)
             {
-                _context.Teacher.Remove(subject);
+                _context.Subject.Remove(subject);
             }
 
             await _context.SaveChangesAsync();
@@ -154,7 +158,7 @@ namespace AHFS.Controllers
 
         private bool SubjectExists(int id)
         {
-            return _context.Teacher.Any(e => e.SubjectId == id);
+            return _context.Subject.Any(e => e.SubjectId == id);
         }
     }
 }

@@ -13,6 +13,11 @@ namespace AHFS.Services.Interfaces
 
         List<Grade> GetGrades();
 
+        List<Grade> GetGradesByStudentId(int id);
+
+        Grade GetGradeBySubjectIdAndStudentId(int subjectId, int studentId);
+
+
     }
 }
 

@@ -46,5 +46,15 @@ namespace AHFS.Services
             return _repositoryWrapper.SubjectRepository.FindAll().ToList();
         }
 
+        public List<Subject> GetSubjectsByStudentInfo(string faculty, int year)
+        {
+            return _repositoryWrapper.SubjectRepository.FindByCondition(c => c.Faculty == faculty && c.YearOfStudy <= year).ToList();
+        }
+
+        public List<Subject> GetSubjectsByTeacherId(int id)
+        {
+            return _repositoryWrapper.SubjectRepository.FindByCondition(c => c.TeacherId == id).ToList();
+        }
+
     }
 }

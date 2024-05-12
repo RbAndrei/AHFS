@@ -22,7 +22,7 @@ namespace AHFS.Controllers
         // GET: Teachers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Subject.Include(t => t.User);
+            var applicationDbContext = _context.Teacher.Include(t => t.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace AHFS.Controllers
                 return NotFound();
             }
 
-            var teacher = await _context.Subject
+            var teacher = await _context.Teacher
                 .Include(t => t.User)
                 .FirstOrDefaultAsync(m => m.TeacherId == id);
             if (teacher == null)
@@ -57,7 +57,7 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TeacherId,Name,Email,PhoneNr,Role,Faculty,UserId")] Teacher teacher)
+        public async Task<IActionResult> Create([Bind("TeacherId,Name,Email,Sex,CNP,Age,PhoneNr,Role,Faculty,UserId")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace AHFS.Controllers
                 return NotFound();
             }
 
-            var teacher = await _context.Subject.FindAsync(id);
+            var teacher = await _context.Teacher.FindAsync(id);
             if (teacher == null)
             {
                 return NotFound();
@@ -91,7 +91,7 @@ namespace AHFS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TeacherId,Name,Email,PhoneNr,Role,Faculty,UserId")] Teacher teacher)
+        public async Task<IActionResult> Edit(int id, [Bind("TeacherId,Name,Email,Sex,CNP,Age,PhoneNr,Role,Faculty,UserId")] Teacher teacher)
         {
             if (id != teacher.TeacherId)
             {
@@ -130,7 +130,7 @@ namespace AHFS.Controllers
                 return NotFound();
             }
 
-            var teacher = await _context.Subject
+            var teacher = await _context.Teacher
                 .Include(t => t.User)
                 .FirstOrDefaultAsync(m => m.TeacherId == id);
             if (teacher == null)
@@ -146,10 +146,10 @@ namespace AHFS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var teacher = await _context.Subject.FindAsync(id);
+            var teacher = await _context.Teacher.FindAsync(id);
             if (teacher != null)
             {
-                _context.Subject.Remove(teacher);
+                _context.Teacher.Remove(teacher);
             }
 
             await _context.SaveChangesAsync();
@@ -158,7 +158,7 @@ namespace AHFS.Controllers
 
         private bool TeacherExists(int id)
         {
-            return _context.Subject.Any(e => e.TeacherId == id);
+            return _context.Teacher.Any(e => e.TeacherId == id);
         }
     }
 }

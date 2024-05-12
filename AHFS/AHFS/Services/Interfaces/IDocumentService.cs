@@ -11,6 +11,8 @@ namespace AHFS.Services.Interfaces
 
         Document GetDocumentById(int id);
 
+        List<Document> GetDocumentsByUserId(string id);
+
         List<Document> GetDocuments();
 
     }

@@ -17,10 +17,16 @@ namespace AHFS.Models
         public bool? Scholarship { get; set; }
         public double? FinalGrade { get; set; }
         public string? Faculty { get; set; }
-
+        public string? Sex { get; set; }
+        public string? CNP { get; set; }
+        public int? Age { get; set; }
+        public int? YearOfStudy { get; set; }
+        public int? Semester { get; set; }
         public string? UserId { get; set; }
         [ForeignKey("UserId")]
         public IdentityUser? User { get; set; }
+
+        public ICollection<Grade>? Grades { get; set; }
 
     }
 }
