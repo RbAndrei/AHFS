@@ -14,8 +14,8 @@ namespace AHFS.Data
         public DbSet<Document>? Document { get; set; }
         public DbSet<Grade>? Grade { get; set; }
         public DbSet<Student>? Student { get; set; }
-        public DbSet<Teacher>? Subject { get; set; }
-        public DbSet<Subject>? Teacher { get; set; }
+        public DbSet<Teacher>? Teacher { get; set; }
+        public DbSet<Subject>? Subject { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder); // Call base method

@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<AHFS.Models.Document>
+
+<h1>Personal Documents</h1>
+
+<p>
+    Here you can find personal uploaded documents
+</p>
+<table class="table">
+    @foreach (var item in Model)
+    {
+           @if(item.Type=="BacDiploma"){
+            <tr>
+                <th>Baccalaureate Diploma</th>
+                <th><a href="~/doc/Documents/@item.Link">Download PDF</a></th>
+            </tr>
+           }
+        @if (item.Type == "ID"){
+            <tr>
+                <th>ID</th>
+                <th><a href="~/doc/Documents/@item.Link">Download PDF</a></th>
+            </tr>
+        }
+        @if (item.Type == "BirthCertificate")
+        {
+            <tr>
+                <th>BirthCertificate</th>
+                <th><a href="~/doc/Documents/@item.Link">Download PDF</a></th>     
+            </tr>
+            }
+    }
+</table>

@@ -11,6 +11,7 @@ namespace AHFS.Services.Interfaces
 
         List<Teacher> GetTeachers();
 
+        Teacher GetTeacherByUserId(string id);
         Teacher GetTeacherById(int id);
     }
 }

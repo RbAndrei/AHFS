@@ -10,6 +10,7 @@ namespace AHFS.Services.Interfaces
         void UpdateStudent(Student student);
 
         Student GetStudentById(int id);
+        Student GetStudentByUserId(string id);
         List<Student> GetStudents();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AHFS.Repositories.Interfaces;
 using AHFS.Services.Interfaces;
 using AHFS.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AHFS.Services
 {
@@ -41,5 +42,15 @@ namespace AHFS.Services
             return _repositoryWrapper.GradeRepository.FindAll().ToList();
         }
 
+        public List<Grade> GetGradesByStudentId(int id)
+        {
+            return _repositoryWrapper.GradeRepository.FindByCondition(c => c.StudentId == id).ToList();
+        }
+        public Grade GetGradeBySubjectIdAndStudentId(int subjectId, int studentId)
+        {
+            return _repositoryWrapper.GradeRepository.FindByCondition(c => c.SubjectId == subjectId && c.StudentId == studentId).FirstOrDefault()!;
+        }
+
+        
     }
 }

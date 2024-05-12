@@ -36,6 +36,11 @@ namespace AHFS.Services
             return _repositoryWrapper.TeacherRepository.FindAll().ToList();
         }
 
+        public Teacher GetTeacherByUserId(string id)
+        {
+            return _repositoryWrapper.TeacherRepository.FindByCondition(c => c.UserId == id).FirstOrDefault()!;
+        }
+
         public Teacher GetTeacherById(int id)
         {
             return _repositoryWrapper.TeacherRepository.FindByCondition(c => c.TeacherId == id).FirstOrDefault()!;

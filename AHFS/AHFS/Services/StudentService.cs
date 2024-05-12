@@ -36,6 +36,11 @@ namespace AHFS.Services
             return _repositoryWrapper.StudentRepository.FindByCondition(c => c.StudentId == id).FirstOrDefault()!;
         }
 
+        public Student GetStudentByUserId(string id)
+        {
+            return _repositoryWrapper.StudentRepository.FindByCondition(c => c.UserId == id).FirstOrDefault()!;
+        }
+
         public List<Student> GetStudents()
         {
             return _repositoryWrapper.StudentRepository.FindAll().ToList();

@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model AHFS.Models.Grade //use grade
+<h1>Edit</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="GradeId" />
+        <div hidden class="form-group">
+            <label asp-for="SubjectId" class="control-label"></label>
+            <select asp-for="SubjectId" class="form-control" asp-items="ViewBag.SubjectId"></select>
+            <span asp-validation-for="SubjectId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="GradeValue" class="control-label"></label>
+            <input asp-for="GradeValue" class="form-control" />
+            <span asp-validation-for="GradeValue" class="text-danger"></span>
+        </div>
+        <div hidden class="form-group">
+            <label asp-for="StudentId" class="control-label"></label>
+            <select asp-for="StudentId" class="form-control" asp-items="ViewBag.StudentId"></select>
+            <span asp-validation-for="StudentId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

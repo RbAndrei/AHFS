@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AHFS.Models
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Profile" asp-route-id="@currentUser.Id">Profile</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Timetables">Timetables</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Documents" asp-route-id="@currentUser.Id">Personal Documents</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GradesSubmit" asp-route-id="@currentUser.Id">Grades Submit</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Certificates">Certificates</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SubjectList" asp-route-id="@currentUser.Id">Subjects List</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="StudentList">Students List</a>
+    </li>
+}

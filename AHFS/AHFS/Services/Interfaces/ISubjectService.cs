@@ -14,6 +14,10 @@ namespace AHFS.Services.Interfaces
         List<Subject> GetSubjectByName(string SubjectName);
 
         List<Subject> GetSubjects();
+
+        List<Subject> GetSubjectsByStudentInfo(string faculty, int year);
+
+        List<Subject> GetSubjectsByTeacherId(int id);
     }
 }
 

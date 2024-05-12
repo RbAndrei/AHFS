@@ -1,0 +1,22 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+}
+<div>
+    @if (User.IsInRole("Teacher"))
+    {
+        <partial name="_teacherProfilePartial" />
+    }
+
+    @if (User.IsInRole("Student"))
+    {
+         <partial name="_studentProfilePartial" />   
+    } 
+</div>
