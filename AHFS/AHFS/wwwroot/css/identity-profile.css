@@ -1,0 +1,64 @@
+﻿form:not(#download-data, #logoutForm) {
+    background-color: white;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+    form:not(#download-data, #logoutForm) div {
+        margin: auto;
+        margin-top: 4%;
+        width: 90%;
+    }
+
+    form:not(#download-data, #logoutForm) button {
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 4%;
+        width: 70% !important;
+    }
+
+#profile-list li a,
+button:not(#logout),
+a.btn {
+    background-color: white;
+    transition: 0.1s;
+    color: black;
+    border-bottom: 2px solid #7ab6ec;
+    border-radius: 0;
+}
+
+    #profile-list li a:hover,
+    button:not(#logout):hover,
+    a.btn:hover {
+        background-color: #7ab6ec;
+        color: white;
+        border-bottom: 2px solid #2d74b4;
+    }
+
+button:not(#logout),
+a.btn {
+    border: 2px solid black;
+}
+
+    button:not(#logout):hover,
+    a.btn:hover {
+        border: 2px solid #2d74b4;
+    }
+
+#personal-data-btns {
+    display: flex;
+    flex-direction: row;
+}
+
+#delete {
+    margin-left: 30px;
+    background-color: #e20000;
+    color: black;
+}
+   
+    #delete:hover {
+        background-color: red;
+        border-color: white;
+        color: white;
+    }
