@@ -18,5 +18,36 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #6fa8dc;
+}
+
+.navbar {
+    border: 0px !important;
+}
+
+.nav-link {
+    border-right: 3px solid black;
+    transition: 0.3s;
+}
+
+.navbar-brand {
+    border-right: 3px solid black;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 0px;
+    transition: 0.3s;
+}
+
+    ul li:last-child a.nav-link {
+        border-right: 0px;
+    }
+
+form button.nav-link {
+    border-right: 0px;
+}
+
+.nav-link:hover,
+.navbar-brand:hover {
+    background-color: #7ab6ec;
 }

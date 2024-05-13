@@ -9,61 +9,91 @@
     var currentUser = await UserManager.GetUserAsync(User);
 }
 
-<h1>Details</h1>
+<link rel="stylesheet" href="~/css/profile-info.css" asp-append-version="true" />
 
-<div>
-    <h4>Profile Information</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Sex)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Sex)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CNP)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CNP)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNr)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNr)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Role)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Faculty)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Faculty)
-        </dd>
-    </dl>
-    <a asp-action="ProfileTeacherEdit" asp-route-id="@Model.TeacherId">Edit</a>
+<div id="profile-parent">
+    <table>
+        <tr>
+            <th class="personal-info">
+                Personal Information
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Sex)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.CNP)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CNP)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Age)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.PhoneNr)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PhoneNr)
+            </td>
+        </tr>
+    </table>
+
+    <a id="profile-edit-btn" asp-action="ProfileTeacherEdit" asp-route-id="@Model.TeacherId">Edit<img src="~/images/crayon.png"/></a>
+
+    <table>
+        <tr>
+            <th class="account-info">
+                Teacher Information
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Role)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Faculty)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Faculty)
+            </td>
+        </tr>
+    </table>
 </div>
 

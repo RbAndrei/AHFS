@@ -9,66 +9,122 @@
     var currentUser = await UserManager.GetUserAsync(User);
 }
 
-<h1>Details</h1>
+<link rel="stylesheet" href="~/css/profile-info.css" asp-append-version="true" />
 
-<div>
-    <h4>Profile Information</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNr)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNr)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Class)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Class)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Group)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Group)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Subgroup)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Subgroup)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Scholarship)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Scholarship)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FinalGrade)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FinalGrade)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Faculty)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Faculty)
-        </dd>
-    </dl>
-    <a asp-action="ProfileStudentEdit" asp-route-id="@Model.StudentId">Edit</a>
+<div id="profile-parent">
+    <table>
+        <tr>
+            <th class="personal-info">
+                Personal Information
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Sex)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.CNP)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CNP)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Age)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.PhoneNr)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.PhoneNr)
+            </td>
+        </tr>
+    </table>
+
+    <a id="profile-edit-btn" asp-action="ProfileStudentEdit" asp-route-id="@Model.StudentId">Edit<img src="~/images/crayon.png" /></a>
+
+    <table>
+        <tr>
+            <th class="account-info">
+                Student Information
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Faculty)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Faculty)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Class)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Class)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Group)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Group)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Subgroup)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Subgroup)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Scholarship)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Scholarship)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.FinalGrade)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.FinalGrade)
+            </td>
+        </tr>
+    </table>
 </div>
