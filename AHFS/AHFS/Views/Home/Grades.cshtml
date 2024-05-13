@@ -1,242 +1,307 @@
 ﻿@model dynamic
 @{
-    ViewData["Title"] = "Grades";
+	ViewData["Title"] = "Grades";
 }
 @inject UserManager<IdentityUser> UserManager
 
+<link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
+
+<style>
+	th, td {
+		width: 25%;
+	}
+
+	#searchInput {
+		border-radius: 0;
+		border: 2px solid black;
+		margin-bottom: 20px;
+		margin-top: 10px;
+		padding-left: 10px;
+	}
+
+	table {
+		margin-bottom: 30px !important;
+		margin-top: 20px !important;
+	}
+</style>
+
 <table class="table">
-    <tbody>
-    <tr>
-    <td><h2>Year 1 Semester 1</h2></td>
-    </tr>
-        @foreach (Subject subject in Model.Subjects)
-        {
-            @if (subject.YearOfStudy == 1)
-            {
-                @if (subject.Semester == 1)
-                {
-                    <tr>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Name)
-                        </td>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Type)
-                        </td>
-                        <td>
-                            @foreach (Grade grade in Model.Grades)
-                            {
-                                @if (grade.SubjectId == subject.SubjectId)
-                                {
-                                    @Html.DisplayFor(modelItem => grade.GradeValue)
-                                }
-                            }
-                        </td>
-                    </tr>
-                }
-            }
-        }
-        <tr>
-            <td><h2>Year 1 Semester 2</h2></td>
-        </tr>
-        @foreach (Subject subject in Model.Subjects)
-        {
-            @if (subject.YearOfStudy == 1)
-            {
-                @if (subject.Semester == 2)
-                {
-                    <tr>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Name)
-                        </td>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Type)
-                        </td>
-                        <td>
-                            @foreach (Grade grade in Model.Grades)
-                            {
-                                @if (grade.SubjectId == subject.SubjectId)
-                                {
-                                    @Html.DisplayFor(modelItem => grade.GradeValue)
-                                }
-                            }
-                        </td>
-                    </tr>
-                }
-            }
-        }
-        <tr>
-            <td><h2>Year 2 Semester 1</h2></td>
-        </tr>
-        @foreach (Subject subject in Model.Subjects)
-        {
-            @if (subject.YearOfStudy == 2)
-            {
-                @if (subject.Semester == 1)
-                {
-                    <tr>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Name)
-                        </td>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Type)
-                        </td>
-                        <td>
-                            @foreach (Grade grade in Model.Grades)
-                            {
-                                @if (grade.SubjectId == subject.SubjectId)
-                                {
-                                    @Html.DisplayFor(modelItem => grade.GradeValue)
-                                }
-                            }
-                        </td>
-                    </tr>
-                }
-            }
-        }
-        <tr>
-            <td><h2>Year 2 Semester 2</h2></td>
-        </tr>
-        @foreach (Subject subject in Model.Subjects)
-        {
-            @if (subject.YearOfStudy == 2)
-            {
-                @if (subject.Semester == 2)
-                {
-                    <tr>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Name)
-                        </td>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Type)
-                        </td>
-                        <td>
-                            @foreach (Grade grade in Model.Grades)
-                            {
-                                @if (grade.SubjectId == subject.SubjectId)
-                                {
-                                    @Html.DisplayFor(modelItem => grade.GradeValue)
-                                }
-                            }
-                        </td>
-                    </tr>
-                }
-            }   
-        }
-        <tr>
-            <td><h2>Year 3 Semester 1</h2></td>
-        </tr>
-        @foreach (Subject subject in Model.Subjects)
-        {
-            @if (subject.YearOfStudy == 3)
-            {
-                @if (subject.Semester == 1)
-                {
-                    <tr>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Name)
-                        </td>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Type)
-                        </td>
-                        <td>
-                            @foreach (Grade grade in Model.Grades)
-                            {
-                                @if (grade.SubjectId == subject.SubjectId)
-                                {
-                                    @Html.DisplayFor(modelItem => grade.GradeValue)
-                                }
-                            }
-                        </td>
-                    </tr>
-                }
-            }   
-        }
-        <tr>
-            <td><h2>Year 3 Semester 2</h2></td>
-        </tr>
-        @foreach (Subject subject in Model.Subjects)
-        {
-            @if (subject.YearOfStudy == 3)
-            {
-                @if (subject.Semester == 2)
-                {
-                    <tr>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Name)
-                        </td>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Type)
-                        </td>
-                        <td>
-                            @foreach (Grade grade in Model.Grades)
-                            {
-                                @if (grade.SubjectId == subject.SubjectId)
-                                {
-                                    @Html.DisplayFor(modelItem => grade.GradeValue)
-                                }
-                            }
-                        </td>
-                    </tr>
-                }
-            }   
-        }
-        <tr>
-            <td><h2>Year 4 Semester 1</h2></td>
-        </tr>
-        @foreach (Subject subject in Model.Subjects)
-        {
-            @if (subject.YearOfStudy == 4)
-            {
-                @if (subject.Semester == 1)
-                {
-                    <tr>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Name)
-                        </td>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Type)
-                        </td>
-                        <td>
-                            @foreach (Grade grade in Model.Grades)
-                            {
-                                @if (grade.SubjectId == subject.SubjectId)
-                                {
-                                    @Html.DisplayFor(modelItem => grade.GradeValue)
-                                }
-                            }
-                        </td>
-                    </tr>
-                }
-            }   
-        }
-        <tr>
-            <td><h2>Year 4 Semester 2</h2></td>
-        </tr>
-        @foreach (Subject subject in Model.Subjects)
-        {
-            @if (subject.YearOfStudy == 4)
-            {
-                @if (subject.Semester == 2)
-                {
-                    <tr>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Name)
-                        </td>
-                        <td style="width:33%">
-                            @Html.DisplayFor(modelItem => subject.Type)
-                        </td>
-                        <td>
-                            @foreach (Grade grade in Model.Grades)
-                            {
-                                @if (grade.SubjectId == subject.SubjectId)
-                                {
-                                    @Html.DisplayFor(modelItem => grade.GradeValue)
-                                }
-                            }
-                        </td>
-                    </tr>
-                }
-            }
-        }
-    </tbody>
+	<tbody>
+		<tr>
+			<td><h2>Year 1 Semester 1</h2></td>
+			<td></td>
+			<td></td>
+		</tr>
+		@foreach (Subject subject in Model.Subjects)
+		{
+			@if (subject.YearOfStudy == 1)
+			{
+				@if (subject.Semester == 1)
+				{
+					<tr>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Name)
+						</td>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Type)
+						</td>
+						<td>
+							@foreach (Grade grade in Model.Grades)
+							{
+								@if (grade.SubjectId == subject.SubjectId)
+								{
+									@Html.DisplayFor(modelItem => grade.GradeValue)
+								}
+							}
+						</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
+</table>
+<table>
+	<tbody>
+		<tr>
+			<td><h2>Year 1 Semester 2</h2></td>
+			<td></td>
+			<td></td>
+		</tr>
+		@foreach (Subject subject in Model.Subjects)
+		{
+			@if (subject.YearOfStudy == 1)
+			{
+				@if (subject.Semester == 2)
+				{
+					<tr>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Name)
+						</td>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Type)
+						</td>
+						<td>
+							@foreach (Grade grade in Model.Grades)
+							{
+								@if (grade.SubjectId == subject.SubjectId)
+								{
+									@Html.DisplayFor(modelItem => grade.GradeValue)
+								}
+							}
+						</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
+</table>
+<table>
+	<tbody>
+		<tr>
+			<td><h2>Year 2 Semester 1</h2></td>
+			<td></td>
+			<td></td>
+		</tr>
+		@foreach (Subject subject in Model.Subjects)
+		{
+			@if (subject.YearOfStudy == 2)
+			{
+				@if (subject.Semester == 1)
+				{
+					<tr>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Name)
+						</td>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Type)
+						</td>
+						<td>
+							@foreach (Grade grade in Model.Grades)
+							{
+								@if (grade.SubjectId == subject.SubjectId)
+								{
+									@Html.DisplayFor(modelItem => grade.GradeValue)
+								}
+							}
+						</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
+</table>
+<table>
+	<tbody>
+		<tr>
+			<td><h2>Year 2 Semester 2</h2></td>
+			<td></td>
+			<td></td>
+		</tr>
+		@foreach (Subject subject in Model.Subjects)
+		{
+			@if (subject.YearOfStudy == 2)
+			{
+				@if (subject.Semester == 2)
+				{
+					<tr>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Name)
+						</td>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Type)
+						</td>
+						<td>
+							@foreach (Grade grade in Model.Grades)
+							{
+								@if (grade.SubjectId == subject.SubjectId)
+								{
+									@Html.DisplayFor(modelItem => grade.GradeValue)
+								}
+							}
+						</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
+</table>
+<table>
+	<tbody>
+		<tr>
+			<td><h2>Year 3 Semester 1</h2></td>
+			<td></td>
+			<td></td>
+		</tr>
+		@foreach (Subject subject in Model.Subjects)
+		{
+			@if (subject.YearOfStudy == 3)
+			{
+				@if (subject.Semester == 1)
+				{
+					<tr>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Name)
+						</td>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Type)
+						</td>
+						<td>
+							@foreach (Grade grade in Model.Grades)
+							{
+								@if (grade.SubjectId == subject.SubjectId)
+								{
+									@Html.DisplayFor(modelItem => grade.GradeValue)
+								}
+							}
+						</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
+</table>
+<table>
+	<tbody>
+		<tr>
+			<td><h2>Year 3 Semester 2</h2></td>
+			<td></td>
+			<td></td>
+		</tr>
+		@foreach (Subject subject in Model.Subjects)
+		{
+			@if (subject.YearOfStudy == 3)
+			{
+				@if (subject.Semester == 2)
+				{
+					<tr>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Name)
+						</td>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Type)
+						</td>
+						<td>
+							@foreach (Grade grade in Model.Grades)
+							{
+								@if (grade.SubjectId == subject.SubjectId)
+								{
+									@Html.DisplayFor(modelItem => grade.GradeValue)
+								}
+							}
+						</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
+</table>
+<table>
+	<tbody>
+		<tr>
+			<td><h2>Year 4 Semester 1</h2></td>
+			<td></td>
+			<td></td>
+		</tr>
+		@foreach (Subject subject in Model.Subjects)
+		{
+			@if (subject.YearOfStudy == 4)
+			{
+				@if (subject.Semester == 1)
+				{
+					<tr>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Name)
+						</td>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Type)
+						</td>
+						<td>
+							@foreach (Grade grade in Model.Grades)
+							{
+								@if (grade.SubjectId == subject.SubjectId)
+								{
+									@Html.DisplayFor(modelItem => grade.GradeValue)
+								}
+							}
+						</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
+</table>
+<table>
+	<tbody>
+		<tr>
+			<td><h2>Year 4 Semester 2</h2></td>
+			<td></td>
+			<td></td>
+		</tr>
+		@foreach (Subject subject in Model.Subjects)
+		{
+			@if (subject.YearOfStudy == 4)
+			{
+				@if (subject.Semester == 2)
+				{
+					<tr>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Name)
+						</td>
+						<td style="width:33%">
+							@Html.DisplayFor(modelItem => subject.Type)
+						</td>
+						<td>
+							@foreach (Grade grade in Model.Grades)
+							{
+								@if (grade.SubjectId == subject.SubjectId)
+								{
+									@Html.DisplayFor(modelItem => grade.GradeValue)
+								}
+							}
+						</td>
+					</tr>
+				}
+			}
+		}
+	</tbody>
 </table>

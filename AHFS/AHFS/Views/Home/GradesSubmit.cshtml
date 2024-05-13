@@ -10,6 +10,28 @@
     ViewData["Title"] = "GradesSubmit";
 }
 @inject UserManager<IdentityUser> UserManager
+
+<link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
+
+<style>
+    th, td {
+        width: 25%;
+    }
+
+    #searchInput {
+        border-radius: 0;
+        border: 2px solid black;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+
+    table {
+        margin-bottom: 30px !important;
+        margin-top: 20px !important;
+    }
+</style>
+
 <input type="text" id="searchInput" onkeyup="filterTables()" placeholder="Search for students..">
 </br>
 
@@ -25,6 +47,9 @@
             <thead>
                 <tr>
                     <td><h1>Academic year @year   Semester @semester</h1></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>Subject</th>
@@ -56,7 +81,7 @@
                                                             <td>@student.Name</td>
                                                         }
                                                     }
-                                                    <td>@grade.GradeValue
+                                                    <td style="width: 7%;">@grade.GradeValue
                                                         <a asp-action="Edit" asp-route-id="@grade.GradeId">Edit</a>
                                                     </td>
                                                 </tr>

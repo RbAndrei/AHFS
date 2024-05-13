@@ -4,6 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
+<link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
+
+<style>
+    #searchInput {
+        border: 2px solid black;
+        border-radius: 0;
+        padding-left: 10px;
+    }
+</style>
+
 <h1>Index</h1>
 <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for students..">
 <table class="table" id="studentsTable">
