@@ -1,0 +1,26 @@
+﻿tr {
+    background-color: white;
+}
+
+    tr:nth-child(even) {
+        background-color: #eeeeee;
+    }
+
+td, th {
+    padding: 5px 0px 5px 8px;
+}
+
+th {
+    background-color: #cccccc !important;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 2px solid black !important;
+}
+
+    table:last-of-type {
+        margin-top: 50px;
+        margin-bottom: 70px;
+    }

@@ -5,6 +5,18 @@
 }
 @inject UserManager<IdentityUser> UserManager
 
+<link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
+
+<style>
+    tr {
+        background-color: white !important;
+    }
+
+        tr:nth-child(odd) {
+            background-color: #eeeeee !important;
+        }
+</style>
+
 <h1>Certificates</h1>
 
 <p>
@@ -15,16 +27,16 @@
 {
     <table class="table">
         <tr>
-            <th>Adeverinta de student</th>
-            <th><a href="~/doc/Certificates/">Download PDF</a></th>
+            <td>Adeverinta de student</td>
+            <td><a href="~/doc/Certificates/">Download PDF</a></td>
         </tr>
         <tr>
-            <th>Adeverinta pentru locul de munca</th>
-            <th><a href="~/doc/Certificates/">Download PDF</a></th>
+            <td>Adeverinta pentru locul de munca</td>
+            <td><a href="~/doc/Certificates/">Download PDF</a></td>
         </tr>
         <tr>
-            <th>Alta adeverinta</th>
-            <th><a href="~/doc/Certificates/">Download PDF</a></th>
+            <td>Alta adeverinta</td>
+            <td><a href="~/doc/Certificates/">Download PDF</a></td>
         </tr>
     </table>
 }
@@ -32,16 +44,16 @@
 {
     <table class="table">
         <tr>
-            <th>Adeverinta de munca</th>
-            <th><a href="~/doc/Certificates/">Download PDF</a></th>
+            <td>Adeverinta de munca</td>
+            <td><a href="~/doc/Certificates/">Download PDF</a></td>
         </tr>
         <tr>
-            <th>Adeverinta de concediu</th>
-            <th><a href="~/doc/Certificates/">Download PDF</a></th>
+            <td>Adeverinta de concediu</td>
+            <td><a href="~/doc/Certificates/">Download PDF</a></td>
         </tr>
         <tr>
-            <th>Alta adeverinta</th>
-            <th><a href="~/doc/Certificates/">Download PDF</a></th>
+            <td>Alta adeverinta</td>
+            <td><a href="~/doc/Certificates/">Download PDF</a></td>
         </tr>
     </table>
 }

@@ -4,6 +4,16 @@
 @{
 }
 @model IEnumerable<AHFS.Models.Subject>
+
+<link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
+
+<style>
+    #searchInput {
+        border: 2px solid black;
+        border-radius: 0;
+    }
+</style>
+
 <h1>Subjects list</h1>
 <div class="form-group">
     <input type="text" class="form-control" id="searchInput" placeholder="Search by name">
