@@ -14,7 +14,7 @@
     }
 </style>
 
-<h1>Index</h1>
+<h1>Students List</h1>
 <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search for students..">
 <table class="table" id="studentsTable">
     <thead>
@@ -41,10 +41,10 @@
                 @Html.DisplayNameFor(model => model.FinalGrade)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Faculty)
+                Specialization
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.YearOfStudy)
+                Year of study
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Semester)
@@ -70,9 +70,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Subgroup)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Scholarship)
-                </td>
+                @if (item.Scholarship == true)
+                {
+                    <td>
+                        Yes
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        No
+                    </td>
+                }
                 <td>
                     @Html.DisplayFor(modelItem => item.FinalGrade)
                 </td>

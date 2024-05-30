@@ -37,7 +37,7 @@
         </tr>
         <tr>
             <td>
-                @Html.DisplayNameFor(model => model.Sex)
+                Gender
             </td>
             <td>
                 @Html.DisplayFor(model => model.Sex)
@@ -112,11 +112,21 @@
         </tr>
         <tr>
             <td>
+
                 @Html.DisplayNameFor(model => model.Scholarship)
             </td>
-            <td>
-                @Html.DisplayFor(model => model.Scholarship)
-            </td>
+            @if (Model.Scholarship == true)
+            {
+                <td>
+                    Yes
+                </td>
+            }
+            else
+            {
+                <td>
+                    No
+                </td>
+            }
         </tr>
         <tr>
             <td>

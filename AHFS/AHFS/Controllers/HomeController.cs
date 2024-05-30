@@ -1,6 +1,7 @@
 using AHFS.Models;
 using AHFS.Services;
 using AHFS.Services.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,9 +21,9 @@ namespace AHFS.Controllers
         private readonly IGradeService _gradeService;
         private readonly ISubjectService _subjectService;
         private readonly IDocumentService _documentService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-
-        public HomeController(IStudentService setService, IUserService userService, ITeacherService teacherService, IGradeService gradeService, ISubjectService subjectService, IDocumentService documentService)
+        public HomeController(IStudentService setService, IUserService userService, ITeacherService teacherService, IGradeService gradeService, ISubjectService subjectService, IDocumentService documentService, IWebHostEnvironment  webHostEnvironment)
         {
             _studentService = setService;
             _userService = userService;
@@ -30,6 +31,7 @@ namespace AHFS.Controllers
             _gradeService = gradeService;
             _subjectService = subjectService;
             _documentService = documentService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -226,13 +228,49 @@ namespace AHFS.Controllers
 
         public IActionResult Certificates()
         {
-            return View();
+            var document = _documentService.GetDocuments();
+            return View(document);
         }
 
         public IActionResult Documents(string id)
         {
             var document = _documentService.GetDocumentsByUserId(id);
             return View(document);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(int documentId, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                // Handle the error condition
+                return RedirectToAction("Error");
+            }
+
+            // Find the document by ID
+            var document = _documentService.GetDocumentById(documentId);
+
+            if (document == null)
+            {
+                // Handle the error condition
+                return RedirectToAction("Error");
+            }
+
+            // Save the file to the wwwroot/doc/Documents directory
+            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "doc", "Documents");
+            var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+
+            // Update the document's link in the database
+            document.Link = uniqueFileName;
+            _documentService.UpdateDocument(document);
+
+            return RedirectToAction("Documents", new { id = document.UserId });
         }
 
     }

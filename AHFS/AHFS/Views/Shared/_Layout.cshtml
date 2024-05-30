@@ -38,6 +38,13 @@
                             {
                                 <partial name="_studentNavPartial" />
                             }
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <partial name="_adminNavPartial" />
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register New User</a>
+                                </li>
+                            }
                         }
 
                     </ul>
