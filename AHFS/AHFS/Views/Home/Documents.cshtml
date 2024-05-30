@@ -1,36 +1,32 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-@model IEnumerable<AHFS.Models.Document>
+﻿@model IEnumerable<AHFS.Models.Document>
+<link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
+<!-- Include necessary scripts and stylesheets -->
 
 <h1>Personal Documents</h1>
 
 <p>
     Here you can find personal uploaded documents
-</p>
 <table class="table">
     @foreach (var item in Model)
     {
-           @if(item.Type=="BacDiploma"){
-            <tr>
-                <th>Baccalaureate Diploma</th>
-                <th><a href="~/doc/Documents/@item.Link">Download PDF</a></th>
-            </tr>
-           }
-        @if (item.Type == "ID"){
-            <tr>
-                <th>ID</th>
-                <th><a href="~/doc/Documents/@item.Link">Download PDF</a></th>
-            </tr>
-        }
-        @if (item.Type == "BirthCertificate")
-        {
-            <tr>
-                <th>BirthCertificate</th>
-                <th><a href="~/doc/Documents/@item.Link">Download PDF</a></th>     
-            </tr>
-            }
+        <tr>
+            <td>@item.Type</td>
+            <td>
+                @if (string.IsNullOrEmpty(item.Link))
+                {
+                    <!-- If Link is empty, show upload button -->
+                    <form asp-action="Upload" enctype="multipart/form-data">
+                        <input type="hidden" name="documentId" value="@item.DocumentId" />
+                        <input type="file" name="file" accept=".pdf,.jpg,.png" />
+                        <button type="submit">Upload</button>
+                    </form>
+                }
+                else
+                {
+                    <!-- If Link is not empty, show download link -->
+                    <a href="~/doc/Documents/@item.Link">Download PDF</a>
+                }
+            </td>
+        </tr>
     }
 </table>

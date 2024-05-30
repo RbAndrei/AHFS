@@ -4,6 +4,7 @@
 @{
 }
 @inject UserManager<IdentityUser> UserManager
+@model IEnumerable<AHFS.Models.Document>
 
 <link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
 
@@ -22,38 +23,67 @@
 <p>
     Here you can find certificates to download
 </p>
-
+<table class="table">
 @if (User.IsInRole("Student"))
 {
-    <table class="table">
-        <tr>
-            <td>Adeverinta de student</td>
-            <td><a href="~/doc/Certificates/">Download PDF</a></td>
-        </tr>
-        <tr>
-            <td>Adeverinta pentru locul de munca</td>
-            <td><a href="~/doc/Certificates/">Download PDF</a></td>
-        </tr>
-        <tr>
-            <td>Alta adeverinta</td>
-            <td><a href="~/doc/Certificates/">Download PDF</a></td>
-        </tr>
-    </table>
+    @foreach (Document document in Model.Where(document => document.Type == "CertificateStudent"))
+    {
+
+        
+            @if (document.Link == "AdeverintaStudent.pdf")
+            {
+                <tr>
+                    <td>Student Certificate</td>
+                    <td><a href="~/doc/Certificates/AdeverintaStudent.pdf">Download PDF</a></td>
+                </tr>
+            }
+            @if (document.Link == "AdeverintaLocDeMuncaStudent.pdf")
+            {
+                <tr>
+                    <td>Certificate for job application</td>
+                    <td><a href="~/doc/Certificates/AdeverintaLocDeMuncaStudent.pdf">Download PDF</a></td>
+                </tr>
+            }
+            @if (document.Link == "AnexaStudent.pdf")
+            {
+                <tr>
+                    <td>Anex 1</td>
+                    <td><a href="~/doc/Certificates/AnexaStudent.pdf">Download PDF</a></td>
+                </tr>
+            }
+        
+    }
 }
+</table>
 @if (User.IsInRole("Teacher"))
 {
     <table class="table">
-        <tr>
-            <td>Adeverinta de munca</td>
-            <td><a href="~/doc/Certificates/">Download PDF</a></td>
-        </tr>
-        <tr>
-            <td>Adeverinta de concediu</td>
-            <td><a href="~/doc/Certificates/">Download PDF</a></td>
-        </tr>
-        <tr>
-            <td>Alta adeverinta</td>
-            <td><a href="~/doc/Certificates/">Download PDF</a></td>
-        </tr>
+    @foreach (Document document in Model.Where(document => document.Type == "CertificateTeacher"))
+    {
+
+        
+            @if (document.Link == "AdeverintaTeacher.pdf")
+            {
+                <tr>
+                    <td>Teacher Certificate</td>
+                    <td><a href="~/doc/Certificates/AdeverintaTeacher.pdf">Download PDF</a></td>
+                </tr>
+            }
+            @if (document.Link == "AdeverintaLocDeMuncaTeacher.pdf")
+            {
+                <tr>
+                    <td>Certificate for Holiday</td>
+                    <td><a href="~/doc/Certificates/AdeverintaLocDeMuncaTeacher.pdf">Download PDF</a></td>
+                </tr>
+            }
+            @if (document.Link == "AnexaTeacher.pdf")
+            {
+                <tr>
+                    <td>Anex 1</td>
+                    <td><a href="~/doc/Certificates/AnexaTeacher.pdf">Download PDF</a></td>
+                </tr>
+            }
+        
+    }
     </table>
 }

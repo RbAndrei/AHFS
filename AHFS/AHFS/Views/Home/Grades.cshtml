@@ -2,7 +2,6 @@
 @{
 	ViewData["Title"] = "Grades";
 }
-@inject UserManager<IdentityUser> UserManager
 
 <link rel="stylesheet" href="~/css/tables.css" asp-append-version="true" />
 
@@ -25,283 +24,164 @@
 	}
 </style>
 
-<table class="table">
-	<tbody>
-		<tr>
-			<td><h2>Year 1 Semester 1</h2></td>
-			<td></td>
-			<td></td>
-		</tr>
-		@foreach (Subject subject in Model.Subjects)
-		{
-			@if (subject.YearOfStudy == 1)
-			{
-				@if (subject.Semester == 1)
-				{
-					<tr>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Name)
-						</td>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Type)
-						</td>
-						<td>
-							@foreach (Grade grade in Model.Grades)
-							{
-								@if (grade.SubjectId == subject.SubjectId)
-								{
-									@Html.DisplayFor(modelItem => grade.GradeValue)
-								}
-							}
-						</td>
-					</tr>
-				}
-			}
-		}
-	</tbody>
-</table>
-<table>
-	<tbody>
-		<tr>
-			<td><h2>Year 1 Semester 2</h2></td>
-			<td></td>
-			<td></td>
-		</tr>
-		@foreach (Subject subject in Model.Subjects)
-		{
-			@if (subject.YearOfStudy == 1)
-			{
-				@if (subject.Semester == 2)
-				{
-					<tr>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Name)
-						</td>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Type)
-						</td>
-						<td>
-							@foreach (Grade grade in Model.Grades)
-							{
-								@if (grade.SubjectId == subject.SubjectId)
-								{
-									@Html.DisplayFor(modelItem => grade.GradeValue)
-								}
-							}
-						</td>
-					</tr>
-				}
-			}
-		}
-	</tbody>
-</table>
-<table>
-	<tbody>
-		<tr>
-			<td><h2>Year 2 Semester 1</h2></td>
-			<td></td>
-			<td></td>
-		</tr>
-		@foreach (Subject subject in Model.Subjects)
-		{
-			@if (subject.YearOfStudy == 2)
-			{
-				@if (subject.Semester == 1)
-				{
-					<tr>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Name)
-						</td>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Type)
-						</td>
-						<td>
-							@foreach (Grade grade in Model.Grades)
-							{
-								@if (grade.SubjectId == subject.SubjectId)
-								{
-									@Html.DisplayFor(modelItem => grade.GradeValue)
-								}
-							}
-						</td>
-					</tr>
-				}
-			}
-		}
-	</tbody>
-</table>
-<table>
-	<tbody>
-		<tr>
-			<td><h2>Year 2 Semester 2</h2></td>
-			<td></td>
-			<td></td>
-		</tr>
-		@foreach (Subject subject in Model.Subjects)
-		{
-			@if (subject.YearOfStudy == 2)
-			{
-				@if (subject.Semester == 2)
-				{
-					<tr>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Name)
-						</td>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Type)
-						</td>
-						<td>
-							@foreach (Grade grade in Model.Grades)
-							{
-								@if (grade.SubjectId == subject.SubjectId)
-								{
-									@Html.DisplayFor(modelItem => grade.GradeValue)
-								}
-							}
-						</td>
-					</tr>
-				}
-			}
-		}
-	</tbody>
-</table>
-<table>
-	<tbody>
-		<tr>
-			<td><h2>Year 3 Semester 1</h2></td>
-			<td></td>
-			<td></td>
-		</tr>
-		@foreach (Subject subject in Model.Subjects)
-		{
-			@if (subject.YearOfStudy == 3)
-			{
-				@if (subject.Semester == 1)
-				{
-					<tr>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Name)
-						</td>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Type)
-						</td>
-						<td>
-							@foreach (Grade grade in Model.Grades)
-							{
-								@if (grade.SubjectId == subject.SubjectId)
-								{
-									@Html.DisplayFor(modelItem => grade.GradeValue)
-								}
-							}
-						</td>
-					</tr>
-				}
-			}
-		}
-	</tbody>
-</table>
-<table>
-	<tbody>
-		<tr>
-			<td><h2>Year 3 Semester 2</h2></td>
-			<td></td>
-			<td></td>
-		</tr>
-		@foreach (Subject subject in Model.Subjects)
-		{
-			@if (subject.YearOfStudy == 3)
-			{
-				@if (subject.Semester == 2)
-				{
-					<tr>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Name)
-						</td>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Type)
-						</td>
-						<td>
-							@foreach (Grade grade in Model.Grades)
-							{
-								@if (grade.SubjectId == subject.SubjectId)
-								{
-									@Html.DisplayFor(modelItem => grade.GradeValue)
-								}
-							}
-						</td>
-					</tr>
-				}
-			}
-		}
-	</tbody>
-</table>
-<table>
-	<tbody>
-		<tr>
-			<td><h2>Year 4 Semester 1</h2></td>
-			<td></td>
-			<td></td>
-		</tr>
-		@foreach (Subject subject in Model.Subjects)
-		{
-			@if (subject.YearOfStudy == 4)
-			{
-				@if (subject.Semester == 1)
-				{
-					<tr>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Name)
-						</td>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Type)
-						</td>
-						<td>
-							@foreach (Grade grade in Model.Grades)
-							{
-								@if (grade.SubjectId == subject.SubjectId)
-								{
-									@Html.DisplayFor(modelItem => grade.GradeValue)
-								}
-							}
-						</td>
-					</tr>
-				}
-			}
-		}
-	</tbody>
-</table>
-<table>
-	<tbody>
-		<tr>
-			<td><h2>Year 4 Semester 2</h2></td>
-			<td></td>
-			<td></td>
-		</tr>
-		@foreach (Subject subject in Model.Subjects)
-		{
-			@if (subject.YearOfStudy == 4)
-			{
-				@if (subject.Semester == 2)
-				{
-					<tr>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Name)
-						</td>
-						<td style="width:33%">
-							@Html.DisplayFor(modelItem => subject.Type)
-						</td>
-						<td>
-							@foreach (Grade grade in Model.Grades)
-							{
-								@if (grade.SubjectId == subject.SubjectId)
-								{
-									@Html.DisplayFor(modelItem => grade.GradeValue)
-								}
-							}
-						</td>
-					</tr>
-				}
-			}
-		}
-	</tbody>
-</table>
+@{
+    // Initialize variables to hold the sum of grades and count of grades for each semester
+    Dictionary<string, (double sum, int count)> semesterSumAndCount = new Dictionary<string, (double, int)>();
+    Dictionary<string, double> finalSemesterGrades = new Dictionary<string, double>();
+    Dictionary<int, double> finalYearGrades = new Dictionary<int, double>();
+
+    // Iterate through each subject to calculate the sum of grades for each semester
+    foreach (var subject in Model.Subjects)
+    {
+        // Key for the semester
+        string semesterKey = $"{subject.YearOfStudy}_Semester_{subject.Semester}";
+
+        // Initialize sum and count for the semester if not already initialized
+        if (!semesterSumAndCount.ContainsKey(semesterKey))
+        {
+            semesterSumAndCount[semesterKey] = (0, 0);
+        }
+
+        // Add the grade value to the sum and increment count
+        foreach (var grade in Model.Grades)
+        {
+            if (grade.SubjectId == subject.SubjectId)
+            {
+                semesterSumAndCount[semesterKey] = (semesterSumAndCount[semesterKey].sum + grade.GradeValue, semesterSumAndCount[semesterKey].count + 1);
+            }
+        }
+    }
+
+    // Sort the semesterSumAndCount dictionary keys to ensure years and semesters are in order
+    var sortedSemesterKeys = semesterSumAndCount.Keys.OrderBy(key => key);
+
+    // Calculate final semester grades
+    foreach (var semesterKey in sortedSemesterKeys)
+    {
+        double finalSemesterGrade = semesterSumAndCount[semesterKey].sum / semesterSumAndCount[semesterKey].count;
+        finalSemesterGrades[semesterKey] = finalSemesterGrade;
+
+        // Calculate final year grades
+        int year = int.Parse(semesterKey.Split('_')[0]);
+        if (!finalYearGrades.ContainsKey(year))
+        {
+            finalYearGrades[year] = 0;
+        }
+
+        finalYearGrades[year] += finalSemesterGrade;
+    }
+
+    // Calculate final year averages
+    foreach (var yearEntry in finalYearGrades)
+    {
+        finalYearGrades[yearEntry.Key] /= 2; // Dividing by 2 to get the average of two semesters
+    }
+}
+
+
+<div id=divID>
+@foreach (var semesterKey in sortedSemesterKeys)
+{
+
+    <table>
+        <tbody>
+            <tr>
+                <td><h2>@($"Year {semesterKey.Split('_')[0]} Semester {semesterKey.Split('_')[2]}")</h2></td>
+                <td></td>
+                    <td><strong>Final Semester Grade: @(finalSemesterGrades[semesterKey].ToString("N2"))</strong></td>
+            </tr>
+            @foreach (Subject subject in Model.Subjects)
+            {
+                if (subject.YearOfStudy == int.Parse(semesterKey.Split('_')[0]) && subject.Semester == int.Parse(semesterKey.Split('_')[2]))
+                {
+                    <tr>
+                        <td style="width:33%">
+                            @Html.DisplayFor(modelItem => subject.Name)
+                        </td>
+                        <td style="width:33%">
+                            @Html.DisplayFor(modelItem => subject.Type)
+                        </td>
+                        <td>
+                            @foreach (Grade grade in Model.Grades)
+                            {
+                                if (grade.SubjectId == subject.SubjectId)
+                                {
+                                    @Html.DisplayFor(modelItem => grade.GradeValue)
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+@foreach (var yearEntry in finalYearGrades.OrderBy(x => x.Key))
+{
+    <table>
+        <tbody>
+            <tr>
+                <td><h2>@($"Year {yearEntry.Key} Final Grade")</h2></td>
+                <td></td>
+                    <td><strong>@(yearEntry.Value.ToString("N2"))</strong></td>
+            </tr>
+        </tbody>
+    </table>
+}
+</div>
+
+<input type="button" value="Convert HTML to PDF" onclick="convertHTMLtoPDF()">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script type="text/javascript">
+    function convertHTMLtoPDF() {
+        const { jsPDF } = window.jspdf;
+
+        let doc = new jsPDF('l', 'mm', [1500, 1400]);
+        let pdfjs = document.querySelector('#divID');
+
+        doc.html(pdfjs, {
+            callback: function (doc) {
+                // Add "ACADEMIC REPORT" at the beginning of the first page
+                doc.setPage(1); // Set page to the first one
+                doc.setFontSize(250);
+                doc.text("ACADEMIC REPORT", 250, 150);
+
+                let totalPages = doc.internal.getNumberOfPages();
+
+                for (let i = 1; i <= totalPages; i++) {
+                    doc.setPage(i);
+                    let yOffset = 10; // Add padding between content and page edge
+                    let contentHeight = doc.internal.pageSize.height - yOffset * 2; // Calculate available height for content
+                    let contentWidth = doc.internal.pageSize.width;
+
+                    // Get HTML content of the current page
+                    let htmlContent = pdfjs.children[i - 1];
+
+                    // Convert HTML content to canvas
+                    html2canvas(htmlContent).then(canvas => {
+                        let imgData = canvas.toDataURL('image/jpeg', 1.0);
+                        doc.addImage(imgData, 'JPEG', 0, yOffset, contentWidth, contentHeight);
+                    });
+
+                    // Add page break if not the last page
+                    if (i !== totalPages) {
+                        doc.addPage();
+                    }
+                }
+
+                // Save the PDF
+                doc.save("StudentGrades.pdf");
+            },
+            x: 12,
+            y: 300
+        });
+    }
+</script>
+
+
+

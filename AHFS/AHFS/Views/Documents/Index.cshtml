@@ -9,6 +9,9 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for information...">
+
 <table class="table">
     <thead>
         <tr>
@@ -25,23 +28,63 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DocumentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DocumentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DocumentId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Link)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DocumentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.DocumentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DocumentId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        function searchTable() {
+            // Declare variables
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.querySelector(".table");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows
+            for (i = 0; i < tr.length; i++) {
+                var found = false; // Flag to track if search query is found in any cell of the row
+
+                // Loop through all table columns
+                for (j = 0; j < tr[i].cells.length; j++) {
+                    td = tr[i].cells[j];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            // If any cell contains the search query, set found flag to true and exit the loop
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Show or hide the row based on whether search query is found in any cell
+                if (found) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+}
